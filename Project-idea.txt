@@ -1,0 +1,50 @@
+🎯 Proyecto Propuesto: “Dibujo de Figuras con Serie de Fourier usando Vectores Giratorios”
+
+✅ Objetivo General
+
+Mostrar cómo se pueden representar dibujos geométricos simples (como círculos, cuadrados, estrellas o incluso texto básico) mediante la descomposición en series de Fourier usando vectores giratorios (Fourier Epicycles).
+
+⸻
+
+🔧 Descripción del Algoritmo (sin código)
+	1.	Entrada de puntos:
+Se parte de una figura representada por una lista de puntos (por ejemplo, el contorno de una estrella, una espiral, una letra o cualquier forma cerrada). Esos puntos se interpretan como valores complejos (x + iy) distribuidos uniformemente en el tiempo.
+	2.	Transformada de Fourier Discreta (DFT):
+Se aplica la DFT a esos puntos para obtener una serie de números complejos, donde cada uno representa:
+	•	Una frecuencia (qué tan rápido rota ese componente),
+	•	Una amplitud (tamaño del vector), y
+	•	Una fase (por dónde inicia la rotación).
+	3.	Ordenamiento de los coeficientes:
+Se ordenan por amplitud (de mayor a menor) para mostrar primero los componentes más importantes (como se hace en compresión de señales o reconstrucción).
+	4.	Visualización con Vectores Giratorios:
+Cada término de la serie de Fourier se representa como un vector que gira en torno a otro:
+	•	El primero parte del origen,
+	•	El siguiente gira desde la punta del anterior, y así sucesivamente.
+La punta del último vector traza el dibujo.
+	5.	Animación:
+Se hace rotar cada vector según su frecuencia y fase, simulando el dibujo progresivo de la figura. Este proceso visualiza cómo la suma de funciones seno/coseno reconstruye una señal compleja.
+
+⸻
+
+🧪 Funcionalidad esperada
+	•	Mostrar la reconstrucción en tiempo real de la figura deseada.
+	•	Control de velocidad y cantidad de componentes (frecuencias) visibles.
+	•	Posibilidad de pausar/reiniciar la animación.
+	•	Interfaz donde se pueda elegir entre varias figuras geométricas precargadas (círculo, cuadrado, estrella, etc).
+
+⸻
+
+💡 Ideas de figuras para incluir
+|  Figura  |                   Comentario técnico                   |
+|----------|--------------------------------------------------------|
+| Círculo  | Ideal para mostrar frecuencia dominante constante.     |
+| Cuadrado | Perfecto para mostrar armónicos impares.               |
+| Triángulo| Muestra cómo disminuyen las amplitudes rápidamente.    |
+| Estrella | Figura compleja, buena para notar muchas frecuencias.  |
+| Letra "S"| Para mostrar cómo incluso el texto puede descomponerse.|
+
+🚀 Herramientas sugeridas
+	•	Frontend: React + Vite
+	•	Lógica matemática: JavaScript puro (o usar math.js si lo prefieres)
+	•	Render: canvas o svg (recomiendo canvas para animación fluida)
+	•	Animación: requestAnimationFrame para control de frames
