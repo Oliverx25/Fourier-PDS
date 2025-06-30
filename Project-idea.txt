@@ -41,10 +41,11 @@ Se hace rotar cada vector según su frecuencia y fase, simulando el dibujo progr
 | Cuadrado | Perfecto para mostrar armónicos impares.               |
 | Triángulo| Muestra cómo disminuyen las amplitudes rápidamente.    |
 | Estrella | Figura compleja, buena para notar muchas frecuencias.  |
-| Letra "S"| Para mostrar cómo incluso el texto puede descomponerse.|
+| Espiral  | Figura de una espiral sencilla.												|
+
+Generacion de poligonos (indicar numero de lados) se deben realizar las vistas de las figuras de una manera similar a como se hacen las demostraciones en el siguinete video:
+https://www.youtube.com/watch?v=Mdk6BWeVNIs&t=168s
 
 🚀 Herramientas sugeridas
 	•	Frontend: React + Vite
-	•	Lógica matemática: JavaScript puro (o usar math.js si lo prefieres)
-	•	Render: canvas o svg (recomiendo canvas para animación fluida)
-	•	Animación: requestAnimationFrame para control de frames
+	•	Usar python para la logica de los renders de la figura.
