@@ -79,26 +79,79 @@ const Controls = ({
       )}
       <div style={{ marginTop: 18 }}>
         <h3 style={{ fontWeight: 600, fontSize: 18, marginBottom: 6, color: '#ffe066' }}>Epiciclos principales</h3>
-        <table style={{ width: '100%', fontSize: 14, borderCollapse: 'collapse', color: '#fff' }}>
+        <p style={{ fontSize: 12, color: '#aaa', marginBottom: 12, lineHeight: 1.4 }}>
+          Los epiciclos se ordenan por importancia (amplitud). El epiciclo principal es el que más contribuye a la forma.
+        </p>
+        <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse', color: '#fff' }}>
           <thead>
-            <tr style={{ borderBottom: '1px solid #333' }}>
-              <th style={{ textAlign: 'left', padding: '2px 4px' }}>#</th>
-              <th style={{ textAlign: 'left', padding: '2px 4px' }}>Freq</th>
-              <th style={{ textAlign: 'left', padding: '2px 4px' }}>Amp</th>
-              <th style={{ textAlign: 'left', padding: '2px 4px' }}>Fase</th>
+            <tr style={{ borderBottom: '1px solid #333', backgroundColor: '#222' }}>
+              <th style={{ textAlign: 'left', padding: '6px 4px', fontWeight: 600 }}>Pos</th>
+              <th style={{ textAlign: 'left', padding: '6px 4px', fontWeight: 600 }}>Frecuencia</th>
+              <th style={{ textAlign: 'left', padding: '6px 4px', fontWeight: 600 }}>Tamaño</th>
+              <th style={{ textAlign: 'left', padding: '6px 4px', fontWeight: 600 }}>Inicio</th>
+              <th style={{ textAlign: 'left', padding: '6px 4px', fontWeight: 600 }}>Importancia</th>
             </tr>
           </thead>
           <tbody>
-            {fourierData.slice(0, topN).map((f, i) => (
-              <tr key={i} style={{ borderBottom: '1px solid #222' }}>
-                <td style={{ padding: '2px 4px' }}>{i + 1}</td>
-                <td style={{ padding: '2px 4px' }}>{f.freq}</td>
-                <td style={{ padding: '2px 4px' }}>{f.amp.toFixed(2)}</td>
-                <td style={{ padding: '2px 4px' }}>{f.phase.toFixed(2)}</td>
-              </tr>
-            ))}
+            {fourierData.slice(0, topN).map((f, i) => {
+              const isMain = i === 0; // El epiciclo principal es el de mayor amplitud (posición 0)
+              const importance = f.amp / fourierData[0].amp; // Importancia relativa al principal
+              const importancePercent = (importance * 100).toFixed(0);
+
+              return (
+                <tr
+                  key={i}
+                  style={{
+                    borderBottom: '1px solid #222',
+                    backgroundColor: isMain ? '#ffe06622' : 'transparent',
+                    fontWeight: isMain ? 600 : 400
+                  }}
+                >
+                  <td style={{ padding: '6px 4px', color: isMain ? '#ffe066' : '#fff' }}>
+                    {i + 1}
+                    {isMain && <span style={{ marginLeft: 4, fontSize: 10 }}>⭐</span>}
+                  </td>
+                  <td style={{ padding: '6px 4px' }}>
+                    {f.freq === 0 ? 'Constante' : `${f.freq} Hz`}
+                  </td>
+                  <td style={{ padding: '6px 4px' }}>
+                    {f.amp.toFixed(3)}
+                  </td>
+                  <td style={{ padding: '6px 4px' }}>
+                    {(f.phase * 180 / Math.PI).toFixed(0)}°
+                  </td>
+                  <td style={{ padding: '6px 4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{
+                        width: 40,
+                        height: 6,
+                        backgroundColor: '#333',
+                        borderRadius: 3,
+                        overflow: 'hidden'
+                      }}>
+                        <div style={{
+                          width: `${importancePercent}%`,
+                          height: '100%',
+                          backgroundColor: isMain ? '#ffe066' : '#3b82f6',
+                          borderRadius: 3
+                        }} />
+                      </div>
+                      <span style={{ fontSize: 11, color: '#aaa' }}>
+                        {importancePercent}%
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+        <div style={{ marginTop: 12, fontSize: 11, color: '#888', lineHeight: 1.4 }}>
+          <p><strong>Frecuencia:</strong> Qué tan rápido gira el epiciclo</p>
+          <p><strong>Tamaño:</strong> Radio del círculo (amplitud)</p>
+          <p><strong>Inicio:</strong> Posición inicial en grados</p>
+          <p><strong>Importancia:</strong> Contribución relativa a la forma final</p>
+        </div>
       </div>
     </div>
   );
